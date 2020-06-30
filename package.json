@@ -1,0 +1,26 @@
+{
+  "name": "slang",
+  "version": "0.0.1",
+  "description": "S programming language",
+  "main": "compiler/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smolovk/slang.git"
+  },
+  "keywords": [
+    "slang",
+    "s"
+  ],
+  "author": "smolovk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smolovk/slang/issues"
+  },
+  "homepage": "https://github.com/smolovk/slang#readme"
+}
