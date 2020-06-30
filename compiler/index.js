@@ -21,7 +21,11 @@ fs.readFile('../test/test.sl', 'utf-8', function (error, content) {
                 if (/".+"/gs.test(printValue)){
                     stringObject['string'] = printValue;
                 } else {
-                    stringObject['number'] = printValue;
+                    if (/[0-9]/gs.test(printValue)){
+                        stringObject['number'] = printValue;
+                    } else {
+                        console.error('String must be in ""')
+                    }
                 }
             }
 
