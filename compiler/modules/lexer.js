@@ -17,23 +17,69 @@ let lexer = function (content, dictionary) {
             if (dictionary["function"].indexOf(command) != -1) {
                 Object.assign(stringObject, {"function": command});
             } else {
-                console.log('undefined');
+                Object.assign(stringObject, {"undefined_function": command});
             }
             
             let value = copyString.replace(new RegExp(command, "g"), "").replace(/\(/, "").replace(/\)/, "");
             
             if (/\"(.*)\"/gim.test(value)) {
-                Object.assign(stringObject, {"string": value});
+                if (value.length === 1){
+                    Object.assign(stringObject, {
+                        "value": {
+                            "type": "string",
+                            "subtype": "char",
+                            "value": value
+                        }
+                    });
+                } else {
+                    Object.assign(stringObject, {
+                        "value": {
+                            "type": "string",
+                            "value": value
+                        }
+                    });
+                }
             } else {
                 if (Number(value)) {
+                    //int
                     if (Number(value) % 1 === 0) {
-                        Object.assign(stringObject, {"int": Number(value)});                
+                        if(Number(value) > -2147483648 && Number(value) < 2147483648){
+                            Object.assign(stringObject, {
+                                "value": {
+                                    "type": "int",
+                                    "value": Number(value)
+                                }});          
+                        } else {
+                            if (Number(value) > -9223372036854775808 && Number(value) < 9223372036854775808) {
+                                Object.assign(stringObject, {
+                                    "value": {
+                                        "type": "int",
+                                        "subtype": "longint",
+                                        "value": Number(value)
+                                    }});  
+                            } else {
+                                Object.assign(stringObject, {
+                                    "value": {
+                                        "type": "int",
+                                        "subtype": "infinity",
+                                        "value": Number(value)
+                                    }});  
+                            }
+                        }      
                     } else {
-                        Object.assign(stringObject, {"float": Number(value)});
+                        Object.assign(stringObject, {
+                            "value": {
+                                "type": "float",
+                                "value": Number(value)
+                            }});
                     }
 
                 } else {
-                    Object.assign(stringObject, {"undefined": value});
+                    Object.assign(stringObject, {
+                        "value": {
+                            "type": "undefined",
+                            "value": value
+                        }});
                 }
             }
             
