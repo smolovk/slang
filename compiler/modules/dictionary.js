@@ -1,5 +1,7 @@
 module.exports = {
-    function: [
-        'print'
-    ]
+    function: {
+        'print': function (el) {
+            console.log(el);            
+        },
+    }
 };

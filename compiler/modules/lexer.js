@@ -14,7 +14,7 @@ let lexer = function (content, dictionary) {
 
             let command = copyString.replace(/\(.+\)/gs, '');   
             
-            if (dictionary["function"].indexOf(command) != -1) {
+            if (dictionary["function"][command]) {
                 Object.assign(stringObject, {"function": command});
             } else {
                 Object.assign(stringObject, {"undefined_function": command});
