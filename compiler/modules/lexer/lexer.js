@@ -6,7 +6,7 @@ let lexer = function (content, dictionary) {
     let lexems  = [];
 
     for (let i = 0; i < strings.length; i++) {
-        let currentString = strings[i].trim();
+        let currentString = strings[i].replace(/\#.+/gm, "").trim();
 
         if (currentString !== "") {
             let copyString = currentString;
@@ -42,14 +42,14 @@ let lexer = function (content, dictionary) {
             } else {
                 if (Number(value)) {
                     //int
-                    if (Number(value) % 1 === 0) {
+                    if (Number(value) % 1 !== 0) {
                         if(Number(value) > -2147483648 && Number(value) < 2147483648){
                             Object.assign(stringObject, {
                                 "value": {
                                     "type": "int",
                                     "value": Number(value)
                                 }});          
-                        } else {
+                        } else  {
                             if (Number(value) > -9223372036854775808 && Number(value) < 9223372036854775808) {
                                 Object.assign(stringObject, {
                                     "value": {
@@ -73,7 +73,7 @@ let lexer = function (content, dictionary) {
                                 "value": Number(value)
                             }});
                     }
-
+            
                 } else {
                     Object.assign(stringObject, {
                         "value": {
@@ -84,6 +84,7 @@ let lexer = function (content, dictionary) {
             }
             
             lexems.push(stringObject);
+            
         }
         
     }

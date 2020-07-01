@@ -1,7 +1,16 @@
+let {Type} = require('./utils/Type')
+
 module.exports = {
     function: {
         print: function (el) {
             let type = "%";
+            let parsedValue = el.value;
+            console.log(el);
+            
+
+            if (el.type === "int" || el.type === "float") {
+                parsedValue = eval(parsedValue);
+            } 
             
             if (el.type === "char") type += "c";
             else if (el.type === "string") type += "s";
@@ -20,7 +29,7 @@ module.exports = {
                 return;                
             }
 
-            return `\tprintf(${type}, ${el.value});\n`;
+            return `\tprintf(${type}, ${parsedValue});\n`;
         },
     }
 };

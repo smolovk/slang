@@ -1,8 +1,8 @@
 const fs = require('fs');
 
 const dictionary = require('./modules/dictionary');
-const {lexer} = require('./modules/lexer');
-const {parser} = require('./modules/parser');
+const {lexer} = require('./modules/lexer/lexer');
+const {parser} = require('./modules/parser/parser');
 
 
 fs.readFile('../test/test.sl', 'utf-8', function (error, content) {
