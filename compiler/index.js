@@ -10,7 +10,9 @@ fs.readFile('../test/test.sl', 'utf-8', function (error, content) {
     if (error === null) {
         let lexems = lexer(content, dictionary);
 
-        parser(lexems, dictionary);
+        let parsedString = parser(lexems, dictionary);
+
+        console.log(parsedString)
         
         //console.log(JSON.stringify(lexems, null, 4));
     } else {
