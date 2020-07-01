@@ -1,7 +1,7 @@
 //var creator
-if (currentString.startsWith("var")) {
-    var varName = currentString.replace(/var /gm, "").replace(/=.+/gs, '').trim();
-    var varValue = currentString.replace(/var /gm, "").replace(varName, '').replace(/.+=/gs, '').trim()
+if (currentString.startsWith("let")) {
+    let varName = currentString.replace(/var /gm, "").replace(/=.+/gs, '').trim();
+    let varValue = currentString.replace(/var /gm, "").replace(varName, '').replace(/.+=/gs, '').trim()
 
     if (/[^a-zA-Z0-9]/gm.test(varName)){
         console.error("Unacceptable symbols in variable name: " + varName);
