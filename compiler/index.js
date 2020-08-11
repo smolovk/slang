@@ -4,7 +4,7 @@ const dictionary = require('./modules/dictionary');
 const {lexer} = require('./modules/lexer');
 
 
-fs.readFile('../test/test.sl', 'utf-8', function (error, content) {
+fs.readFile('../test/test.s', 'utf-8', function (error, content) {
    
     if (error === null) {
         let lexems = lexer(content, dictionary);
