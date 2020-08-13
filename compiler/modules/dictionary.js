@@ -1,6 +1,7 @@
 module.exports = {
     function: [
         'print',
-        'var'
+        'var',
+        'cpp',
     ]
 };

@@ -25,6 +25,8 @@ let translate = (lexems) => {
     for (let i in lexems) {
         if (lexems[i].function == "print") {
             compiled.push("\t" + `cout << ${lexems[i].value.value} << endl;`);
+        } else if (lexems[i].function == "cpp") {
+            compiled.push("\t" + lexems[i].value.value.replace(/"/g, ''));
         }
     };
 

@@ -8,7 +8,7 @@ let lexer = function (content, dictionary) {
     for (let i = 0; i < strings.length; i++) {
         let currentString = strings[i].trim();
 
-        if (currentString !== "") {
+        if (currentString !== "" && !currentString.startsWith("//")) {
             let copyString = currentString;
             let stringObject = {};
 
