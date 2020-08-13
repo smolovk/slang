@@ -7,6 +7,8 @@ const {lexer} = require('./modules/lexer');
 let starting = config.starting;
 let ending = config.ending;
 
+let inFile = process.argv[2]; //file path
+let outFile = inFile.replace(".s", "");
 
 let compile = (lexems) => {
 
@@ -22,14 +24,14 @@ let compile = (lexems) => {
 }
 
 
-fs.readFile(__dirname + "/" + 'test.s', 'utf-8', function (error, content) {
+fs.readFile(__dirname + "/" + inFile, 'utf-8', function (error, content) {
    
     if (error === null) {
         let lexems = lexer(content, dictionary);
 
         //console.log();
         //console.log(JSON.stringify(lexems, null, 4));
-        fs.writeFileSync("compiled.cpp", `${starting}\n${compile(lexems).join("\n")}\n${ending}`)
+        fs.writeFileSync(__dirname + "/compiled.cpp", `${starting}\n${compile(lexems).join("\n")}\n${ending}`)
         console.log(compile(lexems));
     } else {
         console.error(error);        
@@ -37,7 +39,7 @@ fs.readFile(__dirname + "/" + 'test.s', 'utf-8', function (error, content) {
     
 })
 
-exec("g++ -x c++ compiled.cpp -o out", (error, stdout, stderr) => {
+exec("g++ -x c++ compiled.cpp -o " + outFile, (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;
