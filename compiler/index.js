@@ -1,4 +1,5 @@
 const fs = require('fs');
+const {exec} = require("child_process");
 const config = require("../config.js")
 const dictionary = require('./modules/dictionary');
 const {lexer} = require('./modules/lexer');
@@ -13,7 +14,7 @@ let compile = (lexems) => {
 
     for (let i in lexems) {
         if (lexems[i].function == "print") {
-            compiled.push("\t" + `cout << ${lexems[i].value.value} << endl;`);
+            compiled.push("\t" + `std::cout << ${lexems[i].value.value} << endl;`);
         }
     };
 
@@ -35,5 +36,17 @@ fs.readFile(__dirname + "/" + 'test.s', 'utf-8', function (error, content) {
     }
     
 })
+
+exec("g++ -x c++ compiled.cpp -o out", (error, stdout, stderr) => {
+    if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
+});
 
 

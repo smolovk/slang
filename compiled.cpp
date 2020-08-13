@@ -4,11 +4,11 @@ using namespace::std;
     
 int main()
 {
-	cout << "x" << endl;
-	cout << "xsd   " << endl;
-	cout << 43 << endl;
-	cout << 92233720368547 << endl;
-	cout << 9.223372036854776e+21 << endl;
-	cout << 100.5 << endl;
+	std::cout << "x" << endl;
+	std::cout << "xsd" << endl;
+	std::cout << 43 << endl;
+	std::cout << 92233720368547 << endl;
+	std::cout << 9.223372036854776e+21 << endl;
+	std::cout << 100.5 << endl;
 }
 //Slang project
