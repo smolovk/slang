@@ -1,5 +1,5 @@
 //var creator
-if (currentString.startsWith("let")) {
+if (currentString.startsWith("var")) {
     let varName = currentString.replace(/var /gm, "").replace(/=.+/gs, '').trim();
     let varValue = currentString.replace(/var /gm, "").replace(varName, '').replace(/.+=/gs, '').trim()
 
