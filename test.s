@@ -1,5 +1,2 @@
-print(3+7)
-print(1+2)
-print("Kirill")
-cpp("auto a = 123;")
+cpp("auto a = "30+1"")
 print(a)

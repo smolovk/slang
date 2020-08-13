@@ -4,9 +4,9 @@ let lexer = function (content, dictionary) {
     let strings = text.split('\n');
     
     let lexems  = [];
-
-    for (let i = 0; i < strings.length; i++) {
+    for (let i in strings) {
         let currentString = strings[i].trim();
+        
 
         if (currentString !== "" && !currentString.startsWith("//")) {
             let copyString = currentString;
@@ -26,64 +26,73 @@ let lexer = function (content, dictionary) {
                 element.trim();
             });
             
-            if (/\"(.*)\"/gim.test(value[0])) {
-                if (value[0].length === 1){
-                    Object.assign(stringObject, {
-                        "value": {
-                            "type": "string",
-                            "subtype": "char",
-                            "value": value[0]
-                        }
-                    });
-                } else {
-                    Object.assign(stringObject, {
-                        "value": {
-                            "type": "string",
-                            "value": value[0].trim()
-                        }
-                    });
-                }
-            } else {
-                if (Number(value[0])) {
-                    //int
-                    if (Number(value[0]) % 1 === 0) {
-                        if(Number(value[0]) > -2147483648 && Number(value[0]) < 2147483648){
-                            Object.assign(stringObject, {
-                                "value": {
-                                    "type": "int",
-                                    "value": Number(value[0])
-                                }});          
-                        } else {
-                            if (Number(value[0]) > -9223372036854775808 && Number(value[0]) < 9223372036854775808) {
-                                Object.assign(stringObject, {
-                                    "value": {
-                                        "type": "int",
-                                        "subtype": "longint",
-                                        "value": Number(value[0])
-                                    }});  
-                            } else {
-                                Object.assign(stringObject, {
-                                    "value": {
-                                        "type": "int",
-                                        "subtype": "infinity",
-                                        "value": Number(value[0])
-                                    }});  
+            for(let i in value) {
+                if (/\"(.*)\"/gim.test(value[i])) {
+                    if (value[i].length === 1){
+                        Object.assign(stringObject, {
+                            "value": {
+                                "num": i,
+                                "type": "string",
+                                "subtype": "char",
+                                "value": value[i]
                             }
-                        }      
+                        });
                     } else {
                         Object.assign(stringObject, {
                             "value": {
-                                "type": "float",
-                                "value": Number(value[0])
+                                "num": i,
+                                "type": "string",
+                                "value": value[i].trim()
+                            }
+                        });
+                    }
+                } else {
+                    if (Number(value[i])) {
+                        //int
+                        if (Number(value[i]) % 1 === 0) {
+                            if(Number(value[i]) > -2147483648 && Number(value[i]) < 2147483648){
+                                Object.assign(stringObject, {
+                                    "value": {
+                                        "num": i,
+                                        "type": "int",
+                                        "value": Number(value[i])
+                                    }});          
+                            } else {
+                                if (Number(value[i]) > -9223372036854775808 && Number(value[i]) < 9223372036854775808) {
+                                    Object.assign(stringObject, {
+                                        "value": {
+                                            "num": i,
+                                            "type": "int",
+                                            "subtype": "longint",
+                                            "value": Number(value[i])
+                                        }});  
+                                } else {
+                                    Object.assign(stringObject, {
+                                        "value": {
+                                            "num": i,
+                                            "type": "int",
+                                            "subtype": "infinity",
+                                            "value": Number(value[i])
+                                        }});  
+                                }
+                            }      
+                        } else {
+                            Object.assign(stringObject, {
+                                "value": {
+                                    "num": i,
+                                    "type": "float",
+                                    "value": Number(value[i])
+                                }});
+                        }
+
+                    } else {
+                        Object.assign(stringObject, {
+                            "value": {
+                                "num": i,
+                                "type": "undefined",
+                                "value": value[i]
                             }});
                     }
-
-                } else {
-                    Object.assign(stringObject, {
-                        "value": {
-                            "type": "undefined",
-                            "value": value[0]
-                        }});
                 }
             }
             
@@ -91,8 +100,6 @@ let lexer = function (content, dictionary) {
         }
         
     }
-
-
     return lexems;
 }
 
