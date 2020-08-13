@@ -7,8 +7,8 @@ const {lexer} = require('./modules/lexer');
 let starting = config.starting;
 let ending = config.ending;
 
-let inFile = process.argv[2]; //file path
-let outFile = inFile.replace(".s", "");
+let inFile = process.cwd() + "/" + process.argv[2]; //file path
+let outFile = process.argv[2].replace(".s", "");
 
 let compile = (lexems) => {
 
@@ -16,7 +16,7 @@ let compile = (lexems) => {
 
     for (let i in lexems) {
         if (lexems[i].function == "print") {
-            compiled.push("\t" + `std::cout << ${lexems[i].value.value} << endl;`);
+            compiled.push("\t" + `cout << ${lexems[i].value.value} << endl;`);
         }
     };
 
@@ -24,7 +24,7 @@ let compile = (lexems) => {
 }
 
 
-fs.readFile(__dirname + "/" + inFile, 'utf-8', function (error, content) {
+fs.readFile(inFile, 'utf-8', function (error, content) {
    
     if (error === null) {
         let lexems = lexer(content, dictionary);
@@ -39,7 +39,7 @@ fs.readFile(__dirname + "/" + inFile, 'utf-8', function (error, content) {
     
 })
 
-exec("g++ -x c++ compiled.cpp -o " + outFile, (error, stdout, stderr) => {
+exec("g++ -x c++ " + __dirname + "/compiled.cpp -o " + outFile, (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;
@@ -48,7 +48,7 @@ exec("g++ -x c++ compiled.cpp -o " + outFile, (error, stdout, stderr) => {
         console.log(`stderr: ${stderr}`);
         return;
     }
-    console.log(`stdout: ${stdout}`);
+    console.log(`Compiled succesfully to "${outFile}"!`);
 });
 
 

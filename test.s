@@ -1,0 +1,6 @@
+print("x")
+print("xsd")
+print(3 + 4)
+print(92233720368547)
+print(9.22337e+21)
+print(100.5)
