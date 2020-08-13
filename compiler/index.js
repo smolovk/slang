@@ -31,9 +31,9 @@ let translate = (lexems) => {
     return(compiled)
 }
 
-let compile = () => {
+let compile = (outFile) => {
     //compile to executable with g++
-    exec("g++ -x c++ " + __dirname + "/compiled.cpp -o " + outFile, (error, stdout, stderr) => {
+    exec("g++ -x c++ compiled.cpp -o " + outFile, (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
             return;
@@ -43,6 +43,9 @@ let compile = () => {
             return;
         }
         console.log(`Compiled succesfully to "${outFile}"!\n${stdout}`);
+        fs.unlink("compiled.cpp", () => {
+            
+        })
     });
 }
 
@@ -55,13 +58,13 @@ fs.readFile(inFile, 'utf-8', function (error, content) {
 
         //console.log();
         //console.log(JSON.stringify(lexems, null, 4));
-        fs.writeFileSync(__dirname + "/compiled.cpp", `${starting}\n${translate(lexems).join("\n")}\n${ending}`);
-        compile()
+        fs.writeFileSync("compiled.cpp", `${starting}\n${translate(lexems).join("\n")}\n${ending}`);
+        compile(outFile)
         console.log(translate(lexems));
+
+        
     } else {
         console.error(error);        
     }
     
 })
-
-

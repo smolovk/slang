@@ -21,6 +21,7 @@
   "bin": {
     "index.js": "compiler/index.js"
   },
+  
   "author": "smolovk",
   "license": "ISC",
   "bugs": {
