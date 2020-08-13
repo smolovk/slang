@@ -4,6 +4,6 @@ using namespace::std;
     
 int main()
 {
-	cout << 123 << endl;
+	cout << "ello world!" << endl;
 }
 //Slang project

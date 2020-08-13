@@ -7,6 +7,14 @@ const {lexer} = require('./modules/lexer');
 let starting = config.starting;
 let ending = config.ending;
 
+try{
+    let inFile = process.cwd() + "/" + process.argv[2]; //file path
+    let outFile = process.argv[2].replace(".s", "");
+} catch (e) {
+    console.error("Please, enter the filename");
+    return;
+}
+
 let inFile = process.cwd() + "/" + process.argv[2]; //file path
 let outFile = process.argv[2].replace(".s", "");
 
@@ -39,6 +47,8 @@ fs.readFile(inFile, 'utf-8', function (error, content) {
     
 })
 
+
+//compile to executable with g++
 exec("g++ -x c++ " + __dirname + "/compiled.cpp -o " + outFile, (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
@@ -48,7 +58,7 @@ exec("g++ -x c++ " + __dirname + "/compiled.cpp -o " + outFile, (error, stdout, 
         console.log(`stderr: ${stderr}`);
         return;
     }
-    console.log(`Compiled succesfully to "${outFile}"!`);
+    console.log(`Compiled succesfully to "${outFile}"!\n${stdout}`);
 });
 
 
