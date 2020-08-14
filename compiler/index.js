@@ -40,7 +40,7 @@ let translate = (lexems) => {
             };
             //console.log(commands);
             compiled.push("\t" + commands.join("\n\t"));
-        } else if (lexems[i].function == "var") {
+        } else if (lexems[i].function == "var") {      
             compiled.push("\t" + `auto ${lexems[i].args[0]} = ${lexems[i].args[1]};`)
         } else if (lexems[i].function == "in") {
             compiled.push("\t" + `cout << ${lexems[i].args[0]};
