@@ -23,11 +23,22 @@ let translate = (lexems) => {
     let compiled = [];
 
     for (let i in lexems) {
-        if (lexems[i].function == "print") {
-            compiled.push("\t" + `cout << ${lexems[i].value.value} << endl;`);
+        if (lexems[i].undefined_function !== "") {
+            console.error("Compilation error: " + "Undefined function at " + i);
+            process.exit()
+        } else if (lexems[i].function == "print") {
+            compiled.push("\t" + `cout << ${lexems[i].args.join(" << ")} << endl;`);
         } else if (lexems[i].function == "cpp") {
-            compiled.push("\t" + lexems[i].value.value.slice(1, -1) + ";");
-        }
+            let commands = [];
+            for (arg in lexems[i].args) {
+                let argument = lexems[i].args[arg].trim();
+                let command = argument.slice(1, -1);
+                command += ";";
+                commands.push(command);
+            };
+            //console.log(commands);
+            compiled.push("\t" + commands.join("\n\t"));
+        } 
     };
 
     return(compiled)
@@ -62,7 +73,6 @@ fs.readFile(inFile, 'utf-8', function (error, content) {
         //console.log(JSON.stringify(lexems, null, 4));
         fs.writeFileSync("compiled.cpp", `${starting}\n${translate(lexems).join("\n")}\n${ending}`);
         compile(outFile)
-        console.log(translate(lexems));
 
         
     } else {
