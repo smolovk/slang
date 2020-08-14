@@ -24,18 +24,13 @@ let translate = (lexems) => {
 
     for (let i in lexems) {
         //functions
-        if (lexems[i].undefined_function === true) {
-            let strnum = Number(i) + 1;
-            console.error("Compilation error: " + "Undefined function \"" + lexems[i].function + "\" at " + strnum);
-            process.exit()
-        } else if (lexems[i].function == "print") {
+        if (lexems[i].function == "print") {
             compiled.push("\t" + `cout << ${lexems[i].args.join(" << ")} << endl;`);
         } else if (lexems[i].function == "cpp") {
             let commands = [];
             for (arg in lexems[i].args) {
                 let argument = lexems[i].args[arg].trim();
                 let command = argument.slice(1, -1);
-                command += ";";
                 commands.push(command);
             };
             //console.log(commands);
@@ -46,6 +41,10 @@ let translate = (lexems) => {
             compiled.push("\t" + `cout << ${lexems[i].args[0]};
                 cin >> in;
                 cout << endl;`)
+        } else if (lexems[i].undefined_function === true) {
+            let strnum = Number(i) + 1;
+            console.error("Compilation error: " + "Undefined function \"" + lexems[i].function + "\" at " + strnum);
+            process.exit()
         }
     };
 

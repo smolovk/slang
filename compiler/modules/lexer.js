@@ -14,11 +14,11 @@ let lexer = function (content, dictionary) {
 
             let command = copyString.replace(/\(.+\)/gs, '');
             
-            if (dictionary["function"].indexOf(command) != -1) {
+            if (dictionary["function"].indexOf(command.trim) !== -1) {
                 Object.assign(stringObject, {"function": command});
-            }else {
-                Object.assign(stringObject, {"undefined_function": true, "function": command});
                 
+            } else {
+                Object.assign(stringObject, {"undefined_function": true, "function": command});
             }
             
             let argsGot = copyString.replace(new RegExp(command, "g"), "").replace(/\(/, "").replace(/\)/, "");
