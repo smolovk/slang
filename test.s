@@ -1,3 +1,3 @@
-print("hello", "cwe")
+var(myName, "SLang")
 in("What is your name? ")
-print("Hello ,", in)
+print("Hello ", in, "\nMy name is ", myName)
