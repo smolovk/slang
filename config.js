@@ -4,7 +4,8 @@ module.exports = {
 using namespace::std;
     
 int main()
-{`,
+{
+    string in;`,
     ending: `}
 //Slang project`
 }

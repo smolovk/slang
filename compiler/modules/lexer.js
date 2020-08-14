@@ -12,12 +12,13 @@ let lexer = function (content, dictionary) {
             let copyString = currentString;
             let stringObject = {};
 
-            let command = copyString.replace(/\(.+\)/gs, '');   
+            let command = copyString.replace(/\(.+\)/gs, '');
             
             if (dictionary["function"].indexOf(command) != -1) {
                 Object.assign(stringObject, {"function": command});
-            } else {
-                Object.assign(stringObject, {"undefined_function": command});
+            }else {
+                Object.assign(stringObject, {"undefined_function": true, "function": command});
+                
             }
             
             let argsGot = copyString.replace(new RegExp(command, "g"), "").replace(/\(/, "").replace(/\)/, "");

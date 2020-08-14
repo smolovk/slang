@@ -23,8 +23,10 @@ let translate = (lexems) => {
     let compiled = [];
 
     for (let i in lexems) {
-        if (lexems[i].undefined_function !== "") {
-            console.error("Compilation error: " + "Undefined function at " + i);
+        //functions
+        if (lexems[i].undefined_function === true) {
+            let strnum = Number(i) + 1;
+            console.error("Compilation error: " + "Undefined function \"" + lexems[i].function + "\" at " + strnum);
             process.exit()
         } else if (lexems[i].function == "print") {
             compiled.push("\t" + `cout << ${lexems[i].args.join(" << ")} << endl;`);
@@ -38,7 +40,9 @@ let translate = (lexems) => {
             };
             //console.log(commands);
             compiled.push("\t" + commands.join("\n\t"));
-        } 
+        } else if (lexems[i].function == "var") {
+            compiled.push("\t" + `auto ${lexems[i].args[0]} = ${lexems[i].args[1]};`)
+        }
     };
 
     return(compiled)
@@ -55,7 +59,7 @@ let compile = (outFile) => {
             console.log(`stderr: ${stderr}`);
             return;
         }
-        console.log(`Compiled succesfully to "${outFile}"!\n${stdout}`);
+        console.log(`Compiled succesfully to "${outFile}"! ${stdout}`);
         fs.unlink("compiled.cpp", () => {
             
         })

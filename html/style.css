@@ -46,5 +46,29 @@ a {
     box-shadow: 0 15px 20px rgba(46,229,157,.4);
     color: white;
     transform: translateY(-7px);
+    font-size: 12px;
   }
 
+  a:active {
+    transform: translateY(3px);
+    background: #27c083;
+    color: #acabab;
+  }
+
+  .word {
+      transition: 0.3s;
+  }
+  
+  #s{
+      transition: 1s;
+  }
+  
+  .word:hover {
+      color: #64ff7e;
+      font-size: 28px;
+  }
+
+  .word#s:hover {
+    color: #64ff7e;
+    font-size: 70px;
+}

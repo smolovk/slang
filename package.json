@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "pkg .",
-    "start": "node compiler/index.js"
+    "start": "node compiler/index.js",
+    "run": "node compiler/index.js test.s && ./test"
   },
   "repository": {
     "type": "git",
