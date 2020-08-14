@@ -2,6 +2,7 @@
 S programming language 
 
 functions: 
+
     print(args) - prints args to the console 
         example: 
             print("hello")
