@@ -3,5 +3,6 @@ module.exports = {
         'print',
         'cpp',
         'var',
+        'in',
     ],
 };
