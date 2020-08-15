@@ -5,5 +5,6 @@ module.exports = {
         'var',
         'in',
         'if',
+        'mul',
     ],
 };

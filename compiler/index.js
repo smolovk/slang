@@ -54,6 +54,8 @@ let translate = (lexems, obj) => {
             body += bodyTrs.join(";\n");
             body += ";";
             compiled.push(starting + body + ending)
+        } else if (lexems[i].function === "mul") {
+            compiled.push(`cout << ${lexems[i].args.join(" * ")} << endl;`)
         } else if (lexems[i].undefined_function === true) {
             let strnum = Number(i) + 1;
             console.error("Compilation error: " + "Undefined function \"" + lexems[i].function + "\" at " + strnum);
