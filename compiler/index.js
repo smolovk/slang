@@ -50,11 +50,9 @@ let translate = (lexems, obj) => {
             let bodyLex = obj["lexer"](bodyArgs.join("\n"), obj["dict"])
             //let bodyTrs = setTimeout(() => { translate(bodyLex, obj["dict"], obj["lexer"]) }, 0)["_onTimeout"];
             let bodyTrs = translate(bodyLex, obj["dict"], obj["lexer"]);
-            console.log(bodyTrs);
 
             body += bodyTrs.join(";\n");
             body += ";";
-            console.log(starting + body + ending);
             compiled.push(starting + body + ending)
         } else if (lexems[i].undefined_function === true) {
             let strnum = Number(i) + 1;
