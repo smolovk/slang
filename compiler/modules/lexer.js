@@ -14,14 +14,15 @@ let lexer = function (content, dictionary) {
 
             let command = copyString.replace(/\(.+\)/gs, '');
             
-            if (dictionary["function"].indexOf(command.trim) !== -1) {
-                Object.assign(stringObject, {"function": command});
+            if (dictionary["function"].indexOf(command.trim()) !== -1) {
+                Object.assign(stringObject, {"function": command.trim()});
                 
             } else {
                 Object.assign(stringObject, {"undefined_function": true, "function": command});
             }
             
-            let argsGot = copyString.replace(new RegExp(command, "g"), "").replace(/\(/, "").replace(/\)/, "");
+            //let argsGot = copyString.replace(new RegExp(command, "g"), "").slice(1, -1);
+            let argsGot = copyString.slice(command.length).slice(1, -1);
             let args = argsGot.split(",")
             args.forEach(element => {
                 element.trim();

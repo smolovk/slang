@@ -18,7 +18,7 @@ try{
 let inFile = process.cwd() + "/" + process.argv[2]; //file path
 let outFile = process.argv[2].replace(".s", "");
 
-let translate = (lexems) => {
+let translate = (lexems, obj) => {
 
     let compiled = [];
 
@@ -41,13 +41,27 @@ let translate = (lexems) => {
             compiled.push("\t" + `cout << ${lexems[i].args[0]};
                 cin >> in;
                 cout << endl;`)
+        } else if (lexems[i].function === "if") {
+            let starting = `if (${lexems[i].args[0]}) {\n`;
+            let body = "";
+            let ending = "\n}"
+
+            let bodyArgs = lexems[i].args.slice(1);
+            let bodyLex = obj["lexer"](bodyArgs.join("\n"), obj["dict"])
+            //let bodyTrs = setTimeout(() => { translate(bodyLex, obj["dict"], obj["lexer"]) }, 0)["_onTimeout"];
+            let bodyTrs = translate(bodyLex, obj["dict"], obj["lexer"]);
+            console.log(bodyTrs);
+
+            body += bodyTrs.join(";\n");
+            body += ";";
+            console.log(starting + body + ending);
+            compiled.push(starting + body + ending)
         } else if (lexems[i].undefined_function === true) {
             let strnum = Number(i) + 1;
             console.error("Compilation error: " + "Undefined function \"" + lexems[i].function + "\" at " + strnum);
             process.exit()
         }
     };
-
     return(compiled)
 }
 
@@ -78,7 +92,7 @@ fs.readFile(inFile, 'utf-8', function (error, content) {
 
         //console.log();
         //console.log(JSON.stringify(lexems, null, 4));
-        fs.writeFileSync("compiled.cpp", `${starting}\n${translate(lexems).join("\n")}\n${ending}`);
+        fs.writeFileSync("compiled.cpp", `${starting}\n${translate(lexems, {dict: dictionary, lexer: lexer}).join("\n")}\n${ending}`);
         compile(outFile)
 
         

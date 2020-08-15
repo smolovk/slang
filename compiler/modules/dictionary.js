@@ -4,5 +4,6 @@ module.exports = {
         'cpp',
         'var',
         'in',
+        'if',
     ],
 };
