@@ -14,7 +14,7 @@ functions:
             cpp("cout << "Hello world << endl")
             cpp("int ten = 10")
 
-    var(name value) - creates variable, name - string
+    var(name, value) - creates variable, name - string
         example:
             var(ten, 10)
             var(treemulfive, 3 * 5)
@@ -24,6 +24,6 @@ functions:
             in("What is your name?")
             print(in) //returns input
 
-    if(exp commands) - if statement
+    if(exp, commands) - if statement
         example:
-            if("3 > 1" print("Three is bigger than one"))
+            if("3 > 1", print("Three is bigger than one"))
