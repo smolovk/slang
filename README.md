@@ -7,7 +7,7 @@ functions:
         example: 
             print("hello")
             print(3+5)
-            print("answer" " is " 3 + 5)
+            print("answer", " is ", 3 + 5)
 
     cpp(args) - executes c++ code, args - string
         example:
@@ -16,7 +16,7 @@ functions:
 
     var(name value) - creates variable, name - string
         example:
-            var(ten 10)
+            var(ten, 10)
             var(treemulfive, 3 * 5)
 
     in(string) - writes input to "in" variable
