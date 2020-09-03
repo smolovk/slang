@@ -1,1 +1,1 @@
-if("3 == 3", print("3=3"), print("if"))
+if("3 < 3*123" print("3=3") print("if"))

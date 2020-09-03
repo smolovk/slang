@@ -47,8 +47,21 @@ let translate = (lexems, obj) => {
             let ending = "\n}"
 
             let bodyArgs = lexems[i].args.slice(1);
-            let bodyLex = obj["lexer"](bodyArgs.join("\n"), obj["dict"])
-            //let bodyTrs = setTimeout(() => { translate(bodyLex, obj["dict"], obj["lexer"]) }, 0)["_onTimeout"];
+            let bodyLex = obj["lexer"](bodyArgs.join("\n"), obj["dict"]);
+            let bodyTrs = translate(bodyLex, obj["dict"], obj["lexer"]);
+            console.log(bodyTrs);
+
+            body += bodyTrs.join(";\n");
+            body += ";";
+            compiled.push(starting + body + ending)
+        } else if (lexems[i].function === "if") {
+            let starting = `if (${lexems[i].args[0]}) {\n`;
+            let body = "";
+            let ending = "\n}"
+
+            let bodyArgs = lexems[i].args.slice(1);
+            console.log(bodyArgs)
+            let bodyLex = obj["lexer"](bodyArgs.join("\n"), obj["dict"]);
             let bodyTrs = translate(bodyLex, obj["dict"], obj["lexer"]);
             console.log(bodyTrs);
 
@@ -56,11 +69,11 @@ let translate = (lexems, obj) => {
             body += ";";
             console.log(starting + body + ending);
             compiled.push(starting + body + ending)
-        } else if (lexems[i].undefined_function === true) {
+        } /*else if (lexems[i].undefined_function === true) {
             let strnum = Number(i) + 1;
             console.error("Compilation error: " + "Undefined function \"" + lexems[i].function + "\" at " + strnum);
             process.exit()
-        }
+        }*/
     };
     return(compiled)
 }
