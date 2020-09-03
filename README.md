@@ -23,3 +23,7 @@ functions:
         example:
             in("What is your name?")
             print(in) //returns input
+
+    if(exp, commands) - if statement
+        example:
+            if("3 > 1", print("Three is bigger than one"))

@@ -63,17 +63,11 @@ let translate = (lexems, obj) => {
             console.log(bodyArgs)
             let bodyLex = obj["lexer"](bodyArgs.join("\n"), obj["dict"]);
             let bodyTrs = translate(bodyLex, obj["dict"], obj["lexer"]);
-            console.log(bodyTrs);
 
             body += bodyTrs.join(";\n");
             body += ";";
-            console.log(starting + body + ending);
             compiled.push(starting + body + ending)
-        } /*else if (lexems[i].undefined_function === true) {
-            let strnum = Number(i) + 1;
-            console.error("Compilation error: " + "Undefined function \"" + lexems[i].function + "\" at " + strnum);
-            process.exit()
-        }*/
+        } 
     };
     return(compiled)
 }
