@@ -42,29 +42,15 @@ let translate = (lexems, obj) => {
                 cin >> in;
                 cout << endl;`)
         } else if (lexems[i].function === "if") {
-            let starting = `if (${lexems[i].args[0]}) {\n`;
-            let body = "";
-            let ending = "\n}"
+            let starting = `\tif (${lexems[i].args[0].slice(1, -1)}) {\n`;
+            let body = "\t";
+            let ending = "\t\n}"
 
             let bodyArgs = lexems[i].args.slice(1);
             let bodyLex = obj["lexer"](bodyArgs.join("\n"), obj["dict"]);
             let bodyTrs = translate(bodyLex, obj["dict"], obj["lexer"]);
-            console.log(bodyTrs);
 
-            body += bodyTrs.join(";\n");
-            body += ";";
-            compiled.push(starting + body + ending)
-        } else if (lexems[i].function === "if") {
-            let starting = `if (${lexems[i].args[0]}) {\n`;
-            let body = "";
-            let ending = "\n}"
-
-            let bodyArgs = lexems[i].args.slice(1);
-            console.log(bodyArgs)
-            let bodyLex = obj["lexer"](bodyArgs.join("\n"), obj["dict"]);
-            let bodyTrs = translate(bodyLex, obj["dict"], obj["lexer"]);
-
-            body += bodyTrs.join(";\n");
+            body += bodyTrs.join(";\n\t");
             body += ";";
             compiled.push(starting + body + ending)
         } 
@@ -84,9 +70,9 @@ let compile = (outFile) => {
             return;
         }
         console.log(`Compiled succesfully to "${outFile}"! ${stdout}`);
-        fs.unlink("compiled.cpp", () => {
+        //fs.unlink("compiled.cpp", () => {
             
-        })
+        //})
     });
 }
 

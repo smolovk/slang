@@ -24,7 +24,7 @@ let lexer = function (content, dictionary) {
             
             //let argsGot = copyString.replace(new RegExp(command, "g"), "").slice(1, -1);
             let argsGot = copyString.slice(command.length).slice(1, -1);
-            let args = argsGot.split(" ");
+            let args = argsGot.split(",");
             args.forEach(element => {
                 element.trim();
             });
