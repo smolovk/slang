@@ -5,8 +5,8 @@ S programming language
 2. Run ```pkg package.json``` in the project directory
 
 
-functions: 
-
+# Functions: 
+```
     print(args) - prints args to the console 
         example: 
             print("hello")
@@ -31,3 +31,4 @@ functions:
     if(exp, commands) - if statement
         example:
             if("3 > 1", print("Three is bigger than one"))
+```
