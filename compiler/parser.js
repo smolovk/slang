@@ -1,21 +1,23 @@
-//var creator
-if (currentString.startsWith("var")) {
-    let varName = currentString.replace(/var /gm, "").replace(/=.+/gs, '').trim();
-    let varValue = currentString.replace(/var /gm, "").replace(varName, '').replace(/.+=/gs, '').trim()
+class Parser {
 
-    if (/[^a-zA-Z0-9]/gm.test(varName)){
-        console.error("Unacceptable symbols in variable name: " + varName);
-        return;                
+    constructor (compiled) {
+        this.compiled = compiled;
     }
-    else{
-        if(/[0-9]/gm.test(varName[0])){
-            console.error("First character of variable name must be non-numeric: " + varName);
-            return;                    
-        } else {
-            console.log(varName + " = " + varValue);
-            
-        }
+
+    print(lexem) {
+        this.compiled.push("\t" + `cout << ${lexem.args.join(" << ")} << endl;`);
+    }
+
+    cpp(lexem) {
+        let commands = [];
+        for (arg in lexem.args) {
+            let argument = lexem.args[arg].trim();
+            let command = argument.slice(1, -1);
+            commands.push(command);
+        };
+        //console.log(commands);
+        this.compiled.push("\t" + commands.join("\n\t"));
     }
 }
 
-//print
+module.exports = Parser;

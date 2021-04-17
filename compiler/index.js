@@ -3,6 +3,8 @@ const {exec} = require("child_process");
 const config = require("../config.js")
 const dictionary = require('./modules/dictionary');
 const {lexer} = require('./modules/lexer');
+const parser = require("./parser.js");
+
 
 let starting = config.starting;
 let ending = config.ending;
@@ -16,25 +18,20 @@ try{
 }
 
 let inFile = process.cwd() + "/" + process.argv[2]; //file path
-let outFile = process.argv[2].replace(".s", "");
+let outFile = process.argv[2].replace(".slang", "");
 
 let translate = (lexems, obj) => {
 
     let compiled = [];
 
+    const Parser = new parser(compiled);
+
     for (let i in lexems) {
         //functions
         if (lexems[i].function == "print") {
-            compiled.push("\t" + `cout << ${lexems[i].args.join(" << ")} << endl;`);
+            Parser.print(lexems[i]);
         } else if (lexems[i].function == "cpp") {
-            let commands = [];
-            for (arg in lexems[i].args) {
-                let argument = lexems[i].args[arg].trim();
-                let command = argument.slice(1, -1);
-                commands.push(command);
-            };
-            //console.log(commands);
-            compiled.push("\t" + commands.join("\n\t"));
+            Parser.cpp(lexems[i]);
         } else if (lexems[i].function == "var") {      
             compiled.push("\t" + `auto ${lexems[i].args[0]} = ${lexems[i].args[1]};`)
         } else if (lexems[i].function == "in") {
@@ -85,7 +82,7 @@ fs.readFile(inFile, 'utf-8', function (error, content) {
 
         //console.log();
         //console.log(JSON.stringify(lexems, null, 4));
-        fs.writeFileSync("compiled.cpp", `${starting}\n${translate(lexems, {dict: dictionary, lexer: lexer}).join("\n")}\n${ending}`);
+        fs.writeFileSync("compiled.cpp", `${starting}\n${translate(lexems, {dict: dictionary, lexer}).join("\n")}\n${ending}`);
         compile(outFile)
 
         

@@ -5,9 +5,14 @@ using namespace::std;
 int main()
 {
     string in;
-	if (3 < 3*123) {
-		cout << "3=3" << endl;;
-		cout << "if" << endl;;	
-}
+	cout << "ffwewe: ";
+                cin >> in;
+                cout << endl;
+	auto in1 =  in;
+	cout << "sdsd: ";
+                cin >> in;
+                cout << endl;
+	cout << in1 << endl;
+	cout << in << endl;
 }
 //Slang project
