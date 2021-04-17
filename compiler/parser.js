@@ -32,6 +32,16 @@ class Parser {
         body += ";";
         this.compiled.push(starting + body + ending)
     }
+
+    in(lexem) {
+        this.compiled.push("\t" + `cout << ${lexem.args[0]};
+                cin >> in;
+                cout << endl;`);
+    }
+
+    var(lexem) {
+        this.compiled.push("\t" + `auto ${lexem.args[0]} = ${lexem.args[1]};`);
+    }
 }
 
 module.exports = Parser;

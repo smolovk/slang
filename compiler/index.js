@@ -33,11 +33,9 @@ let translate = (lexems, obj) => {
         } else if (lexems[i].function == "cpp") {
             Parser.cpp(lexems[i]);
         } else if (lexems[i].function == "var") {      
-            compiled.push("\t" + `auto ${lexems[i].args[0]} = ${lexems[i].args[1]};`)
+            Parser.var(lexems[i]);
         } else if (lexems[i].function == "in") {
-            compiled.push("\t" + `cout << ${lexems[i].args[0]};
-                cin >> in;
-                cout << endl;`)
+            Parser.in(lexems[i])
         } else if (lexems[i].function === "if") {
             Parser.if(lexems[i]);
         } 
