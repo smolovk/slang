@@ -18,6 +18,20 @@ class Parser {
         //console.log(commands);
         this.compiled.push("\t" + commands.join("\n\t"));
     }
+
+    if(lexem) {
+        let starting = `\tif (${lexems[i].args[0].slice(1, -1)}) {\n`;
+        let body = "\t";
+        let ending = "\t\n}"
+
+        let bodyArgs = lexems[i].args.slice(1);
+        let bodyLex = obj["lexer"](bodyArgs.join("\n"), obj["dict"]);
+        let bodyTrs = translate(bodyLex, obj["dict"], obj["lexer"]);
+
+        body += bodyTrs.join(";\n\t");
+        body += ";";
+        this.compiled.push(starting + body + ending)
+    }
 }
 
 module.exports = Parser;

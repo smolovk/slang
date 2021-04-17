@@ -39,17 +39,7 @@ let translate = (lexems, obj) => {
                 cin >> in;
                 cout << endl;`)
         } else if (lexems[i].function === "if") {
-            let starting = `\tif (${lexems[i].args[0].slice(1, -1)}) {\n`;
-            let body = "\t";
-            let ending = "\t\n}"
-
-            let bodyArgs = lexems[i].args.slice(1);
-            let bodyLex = obj["lexer"](bodyArgs.join("\n"), obj["dict"]);
-            let bodyTrs = translate(bodyLex, obj["dict"], obj["lexer"]);
-
-            body += bodyTrs.join(";\n\t");
-            body += ";";
-            compiled.push(starting + body + ending)
+            Parser.if(lexems[i]);
         } 
     };
     return(compiled)
