@@ -3,7 +3,13 @@ const {exec} = require("child_process");
 const config = require("../config.js")
 const dictionary = require('./modules/dictionary');
 const {lexer} = require('./modules/lexer');
-const parser = require("./parser.js");
+const parser = require("./modules/parser.js");
+const preprocessor = require("./modules/preprocessor");
+const translator = require("./modules/translator");
+const compiler = require("./modules/compiler");
+
+const Translator = new translator(parser);
+const Compiler = new compiler(exec);
 
 
 let starting = config.starting;
@@ -20,58 +26,15 @@ try{
 let inFile = process.cwd() + "/" + process.argv[2]; //file path
 let outFile = process.argv[2].replace(".slang", "");
 
-let translate = (lexems, obj) => {
-
-    let compiled = [];
-
-    const Parser = new parser(compiled);
-
-    for (let i in lexems) {
-        //functions
-        if (lexems[i].function == "print") {
-            Parser.print(lexems[i]);
-        } else if (lexems[i].function == "cpp") {
-            Parser.cpp(lexems[i]);
-        } else if (lexems[i].function == "var") {      
-            Parser.var(lexems[i]);
-        } else if (lexems[i].function == "in") {
-            Parser.in(lexems[i])
-        } else if (lexems[i].function === "if") {
-            Parser.if(lexems[i]);
-        } 
-    };
-    return(compiled)
-}
-
-let compile = (outFile) => {
-    //compile to executable with g++
-    exec("g++ -x c++ compiled.cpp -o " + outFile, (error, stdout, stderr) => {
-        if (error) {
-            console.log(`error: ${error.message}`);
-            return;
-        }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
-        }
-        console.log(`Compiled succesfully to "${outFile}"! ${stdout}`);
-        //fs.unlink("compiled.cpp", () => {
-            
-        //})
-    });
-}
 
 
-
-fs.readFile(inFile, 'utf-8', function (error, content) {
+fs.readFile(inFile, 'utf-8', (error, content) => {
    
     if (error === null) {
-        let lexems = lexer(content, dictionary);
+        let lexems = lexer(content, dictionary, preprocessor);
 
-        //console.log();
-        //console.log(JSON.stringify(lexems, null, 4));
-        fs.writeFileSync("compiled.cpp", `${starting}\n${translate(lexems, {dict: dictionary, lexer}).join("\n")}\n${ending}`);
-        compile(outFile)
+        fs.writeFileSync("compiled.cpp", `${starting}\n${Translator.translate(lexems, {dict: dictionary, lexer}).join("\n")}\n${ending}`);
+        Compiler.compile(outFile)
 
         
     } else {

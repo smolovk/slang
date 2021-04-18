@@ -10,7 +10,7 @@ class Parser {
 
     cpp(lexem) {
         let commands = [];
-        for (arg in lexem.args) {
+        for (let arg in lexem.args) {
             let argument = lexem.args[arg].trim();
             let command = argument.slice(1, -1);
             commands.push(command);

@@ -6,3 +6,5 @@ in("sdsd: ")
 print(in1)
 
 print(in)
+
+#include(test1.slang)

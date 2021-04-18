@@ -6,5 +6,6 @@ module.exports = {
         'in',
         'if',
         'mul',
+        '#include'
     ],
 };
