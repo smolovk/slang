@@ -14,11 +14,6 @@ S programming language
             print(3+5)
             print("answer", " is ", 3 + 5)
 
-    cpp(args) - executes c++ code, args - string
-        example:
-            cpp("cout << "Hello world << endl")
-            cpp("int ten = 10")
-
     var(name, value) - creates variable, name - string
         example:
             var(ten, 10)
