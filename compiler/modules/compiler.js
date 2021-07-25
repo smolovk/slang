@@ -3,7 +3,12 @@ class Compiler {
         this.exec = exec;
     }
 
-    compile(outFile) {
+    /**
+     * 
+     * @param {string} outFile 
+     * @param {boolean} unlink=true
+     */
+    compile(outFile, unlink=true) {
         //compile to executable with g++
         this.exec("g++ -x c++ compiled.cpp -o " + outFile, (error, stdout, stderr) => {
             if (error) {
@@ -15,9 +20,11 @@ class Compiler {
                 return;
             }
             console.log(`Compiled succesfully to "${outFile}"! ${stdout}`);
-            //fs.unlink("compiled.cpp", () => {
-                
-            //})
+            if (unlink) {
+                fs.unlink("compiled.cpp", () => {
+                    
+                })
+            }
         });
     }
 }

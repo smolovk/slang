@@ -4,7 +4,6 @@ const lexer = (content, dictionary, preprocessor) => {
     const Preprocessor = new preprocessor(fs);
     const funcRegexp = /.+(.+)/gs;
     let text = content;
-    //.replace(/\s\s+/gm, " ");
     let strings = text.split('\n');
     
     for (let str in strings) {
@@ -40,7 +39,6 @@ const lexer = (content, dictionary, preprocessor) => {
                 Object.assign(stringObject, {"undefined_function": true, "function": command});
             }
             
-            //let argsGot = copyString.replace(new RegExp(command, "g"), "").slice(1, -1);
             let argsGot = copyString.slice(command.length).slice(1, -1);
             let args = argsGot.split(",");
             args.forEach(element => {

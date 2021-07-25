@@ -2,8 +2,9 @@
 S programming language 
 # How to run
 1. Run ```npm i``` in the project directory
-2. Run ```pkg package.json``` in the project directory
-3. Run the executable for your system
+2. Run ```npm i -g pkg```
+3. Run ```pkg package.json``` in the project directory
+4. Run the executable for your system
 
 
 # Functions: 
