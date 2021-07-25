@@ -1,6 +1,7 @@
 class Compiler {
     constructor(exec) {
         this.exec = exec;
+        this.fs = require('fs');
     }
 
     /**
@@ -21,7 +22,7 @@ class Compiler {
             }
             console.log(`Compiled succesfully to "${outFile}"! ${stdout}`);
             if (unlink) {
-                fs.unlink("compiled.cpp", () => {
+                this.fs.unlink("compiled.cpp", () => {
                     
                 })
             }

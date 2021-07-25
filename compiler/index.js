@@ -17,14 +17,14 @@ let ending = config.ending;
 
 try{
     let inFile = process.cwd() + "/" + process.argv[2]; //file path
-    let outFile = process.argv[2].replace(".s", "");
+    let outFile = process.argv[2].replace(".sl", "");
 } catch (e) {
     console.error("Please, enter the filename");
     return;
 }
 
 let inFile = process.cwd() + "/" + process.argv[2]; //file path
-let outFile = process.argv[2].replace(".slang", "");
+let outFile = process.argv[2].replace(".sl", "");
 
 
 
@@ -34,7 +34,7 @@ fs.readFile(inFile, 'utf-8', (error, content) => {
         let lexems = lexer(content, dictionary, preprocessor);
 
         fs.writeFileSync("compiled.cpp", `${starting}\n${Translator.translate(lexems, {dict: dictionary, lexer}).join("\n")}\n${ending}`);
-        Compiler.compile(outFile)
+        Compiler.compile(outFile, false)
 
         
     } else {
