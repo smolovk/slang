@@ -5,6 +5,8 @@ using namespace::std;
 int main()
 {
     string in;
-	cout << 3-5 << endl;
+	if (3<5) {
+		cout << 123 << endl;;	
+}
 }
 //Slang project

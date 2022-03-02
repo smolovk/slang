@@ -1,6 +1,6 @@
 class Translator {
     constructor(parser) {
-        this.parser = parser;
+        this.parser = require('./parser');
     }
 
     translate(lexems) {
