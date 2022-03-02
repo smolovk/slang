@@ -38,3 +38,7 @@ You can use any extension for input files, but for better code structuring, use 
         example:
             if("3 > 1", print("Three is bigger than one"))
 ```
+
+# File imports
+Since there are no functions in SLang, you can use external files as functions. To import file, use keyword `#include`, followed by file name in parentheses.
+Example: `#include(test_include.sl)`
