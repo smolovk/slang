@@ -9,7 +9,6 @@ const lexer = (content, dictionary, preprocessor) => {
     
     for (let str in strings) {
         if (strings[str].startsWith("#include")) {
-            console.log(1);
             let currentString = strings[str].trim();
             let copyString = currentString;
             let command = copyString.replace(/\(.+\)/gs, '');

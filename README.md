@@ -1,10 +1,19 @@
 # slang
-S programming language 
+SLANG programming language
+
+##### ONLY FOR LINUX SYSTEMS
+
+# File extensions
+You can use any extension for input files, but for better code structuring, use .sl
+
 # How to run
 1. Run ```npm i``` in the project directory
 2. Run ```npm i -g pkg```
-3. Run ```pkg package.json``` in the project directory
-4. Run the executable for your system
+3. Run ```pkg -t linux package.json``` in the project directory
+4. Run the executable
+
+# Executable usage
+./slang <input file (e.g test.sl)> <output file (e.g. test)>
 
 
 # Functions: 
