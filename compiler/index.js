@@ -25,7 +25,7 @@ try{
 }
 
 let inFile = process.cwd() + "/" + process.argv[2]; //file path
-let outFile = process.argv[2].replace(".sl", "");
+let outFile = process.argv[3] || process.argv[2].replace(".sl", "");
 
 
 
