@@ -7,6 +7,7 @@ const parser = require("./modules/parser.js");
 const preprocessor = require("./modules/preprocessor");
 const translator = require("./modules/translator");
 const compiler = require("./modules/compiler");
+const logger = require("./modules/logger")
 
 const Translator = new translator(parser);
 const Compiler = new compiler(exec);
@@ -19,7 +20,7 @@ try{
     let inFile = process.cwd() + "/" + process.argv[2]; //file path
     let outFile = process.argv[2].replace(".sl", "");
 } catch (e) {
-    console.error("Please, enter the filename");
+    logger.error('Please, enter the filename')
     return;
 }
 
@@ -35,8 +36,6 @@ fs.readFile(inFile, 'utf-8', (error, content) => {
 
         fs.writeFileSync("compiled.cpp", `${starting}\n${Translator.translate(lexems, {dict: dictionary, lexer}).join("\n")}\n${ending}`);
         Compiler.compile(outFile, false)
-
-        
     } else {
         console.error(error);        
     }

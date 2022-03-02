@@ -1,4 +1,5 @@
 const fs = require('fs');
+const logger = require('./logger');
 
 const lexer = (content, dictionary, preprocessor) => {
     const Preprocessor = new preprocessor(fs);
@@ -31,11 +32,12 @@ const lexer = (content, dictionary, preprocessor) => {
             let stringObject = {};
 
             let command = copyString.replace(/\(.+\)/gs, '');
-            
+
             if (dictionary["function"].indexOf(command.trim()) !== -1) {
                 Object.assign(stringObject, {"function": command.trim()});
                 
             } else {
+                logger.error(`Undefined function "${command.trim()}"`)
                 Object.assign(stringObject, {"undefined_function": true, "function": command});
             }
             

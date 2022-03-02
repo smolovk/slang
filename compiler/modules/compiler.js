@@ -1,3 +1,5 @@
+const logger = require('./logger');
+
 class Compiler {
     constructor(exec) {
         this.exec = exec;
@@ -20,7 +22,7 @@ class Compiler {
                 console.log(`stderr: ${stderr}`);
                 return;
             }
-            console.log(`Compiled succesfully to "${outFile}"! ${stdout}`);
+            logger.success(`Compiled to ${outFile}${stdout}`);
             if (unlink) {
                 this.fs.unlink("compiled.cpp", () => {
                     
