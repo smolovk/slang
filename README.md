@@ -13,7 +13,7 @@ You can use any extension for input files, but for better code structuring, use 
 4. Run the executable
 
 # Executable usage
-./slang <input file (e.g test.sl)> <output file (e.g. test)>
+`./slang <input file (e.g test.sl)> <output file (e.g. test)>`
 
 
 # Functions: 
