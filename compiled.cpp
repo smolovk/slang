@@ -5,8 +5,8 @@ using namespace::std;
 int main()
 {
     string in;
-	if (3<5) {
-		cout << 123 << endl;;	
+	auto b =  "32";
+	cout << b << endl;
+	auto  bint = stoi(b);
 }
-}
-//Slang project
+//slang project

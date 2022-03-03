@@ -47,6 +47,10 @@ class Parser {
     var(lexem) {
         this.compiled.push("\t" + `auto ${lexem.args[0]} = ${lexem.args[1]};`);
     }
+
+    stoi(lexem) {
+        this.compiled.push("\t" + `auto ${lexem.args[1]} = stoi(${lexem.args[0]});`);
+    }
 }
 
 module.exports = Parser;

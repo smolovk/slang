@@ -21,6 +21,8 @@ class Translator {
                 this.Parser.in(lexems[i])
             } else if (lexems[i].function === "if") {
                 this.Parser.if(lexems[i]);
+            } else if (lexems[i].function === "stoi") {
+                this.Parser.stoi(lexems[i]);
             } 
         };
         return(compiled)

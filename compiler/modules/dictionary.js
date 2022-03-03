@@ -6,6 +6,7 @@ module.exports = {
         'in',
         'if',
         'mul',
-        '#include'
+        '#include',
+        'stoi',
     ],
 };

@@ -7,5 +7,5 @@ int main()
 {
     string in;`,
     ending: `}
-//Slang project`
+//slang project`
 }

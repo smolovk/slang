@@ -7,3 +7,4 @@ test.cpp
 testcpp
 test
 compiled.cpp
+*.sl
