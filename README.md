@@ -37,6 +37,10 @@ You can use any extension for input files, but for better code structuring, use 
     if(exp, commands) - if statement
         example:
             if("3 > 1", print("Three is bigger than one"))
+
+    stoi(string_variable, int_variable) - creates int var of string one
+        example:
+            stoi(string_a, int_a) //results to cpp auto int_a = stoi(string_a)
 ```
 
 # File imports
