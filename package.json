@@ -9,7 +9,8 @@
   "scripts": {
     "build": "pkg .",
     "start": "node compiler/index.js",
-    "run": "node compiler/index.js test.sl && ./test"
+    "run": "node compiler/index.js test.sl && ./test",
+    "debug": "node compiler/index.js -d test.sl && ./test"
   },
   "repository": {
     "type": "git",

@@ -6,5 +6,6 @@ slang-win.exe
 test.cpp
 testcpp
 test
+test.sl
 compiled.cpp
 *.sl

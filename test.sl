@@ -1,3 +1,1 @@
-var(b, "32")
-print(b)
-stoi(b, bint)
+if("3<5", print(123), print(312))

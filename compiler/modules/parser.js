@@ -10,7 +10,7 @@ class Parser {
     }
 
     print(lexem) {
-        this.compiled.push("\t" + `cout << ${lexem.args.join(" << ")} << endl;`);
+        this.compiled.push("\t" + `cout << ${lexem.args.join(" << ")} << endl`);
     }
 
     cpp(lexem) {
@@ -27,7 +27,7 @@ class Parser {
     if(lexem) {
         let starting = `\tif (${lexem.args[0].slice(1, -1)}) {\n`;
         let body = "\t";
-        let ending = "\t\n}"
+        let ending = "\n\t}"
 
         let bodyArgs = lexem.args.slice(1);
         let bodyLex = this.lexer(bodyArgs.join("\n"), this.dict, this.preprocessor);
@@ -50,6 +50,10 @@ class Parser {
 
     stoi(lexem) {
         this.compiled.push("\t" + `auto ${lexem.args[1]} = stoi(${lexem.args[0]});`);
+    }
+
+    pass(lexem) {
+        this.compiled.push(";")
     }
 }
 

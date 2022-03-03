@@ -19,7 +19,6 @@ let ending = config.ending;
 let unlink = true;
 
 try{
-    console.log(process.argv.indexOf("-d"));
     if(process.argv.indexOf("--debug") !== -1) {
         process.argv.splice(process.argv.indexOf("--debug"), 1);
         unlink = false;
