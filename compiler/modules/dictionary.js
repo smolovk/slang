@@ -5,6 +5,7 @@ module.exports = {
         'var',
         'in',
         'if',
+        'else',
         'mul',
         '#include',
         'stoi',

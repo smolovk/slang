@@ -38,6 +38,19 @@ class Parser {
         this.compiled.push(starting + body + ending)
     }
 
+    else(lexem) {
+        let starting = `\telse {\n`;
+        let body = "\t";
+        let ending = "\n\t}"
+
+        let bodyLex = this.lexer(lexem.args.join("\n"), this.dict, this.preprocessor);
+        let bodyTrs = this.translator.translate(bodyLex, this.dict, this.lexer);
+
+        body += bodyTrs.join(";\n\t");
+        body += ";";
+        this.compiled.push(starting + body + ending)
+    }
+
     in(lexem) {
         this.compiled.push("\t" + `cout << ${lexem.args[0]};
                 cin >> in;

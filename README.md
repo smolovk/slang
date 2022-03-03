@@ -37,6 +37,10 @@ You can use any extension for input files, but for better code structuring, use 
     if(exp, commands) - if statement
         example:
             if("3 > 1", print("Three is bigger than one"))
+    else(exp, commands) - else statement
+        example:
+            if("3 > 1", print("Three is bigger than one"))
+            else(print("Three is NOT bigger than one"))
 
     stoi(string_variable, int_variable) - creates int var of string one
         example:
