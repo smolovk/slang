@@ -16,7 +16,17 @@ const Compiler = new compiler(exec);
 let starting = config.starting;
 let ending = config.ending;
 
+let unlink = true;
+
 try{
+    console.log(process.argv.indexOf("-d"));
+    if(process.argv.indexOf("--debug") !== -1) {
+        process.argv.splice(process.argv.indexOf("--debug"), 1);
+        unlink = false;
+    } else if (process.argv.indexOf("-d") !== -1) {
+        process.argv.splice(process.argv.indexOf("-d"), 1);
+        unlink = false;
+    }
     let inFile = process.cwd() + "/" + process.argv[2]; //file path
     let outFile = process.argv[2].replace(".sl", "");
 } catch (e) {
@@ -35,7 +45,7 @@ fs.readFile(inFile, 'utf-8', (error, content) => {
         let lexems = lexer(content, dictionary, preprocessor);
 
         fs.writeFileSync("compiled.cpp", `${starting}\n${Translator.translate(lexems, {dict: dictionary, lexer}).join("\n")}\n${ending}`);
-        Compiler.compile(outFile, false)
+        Compiler.compile(outFile, unlink)
     } else {
         console.error(error);        
     }
