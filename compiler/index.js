@@ -42,7 +42,7 @@ fs.readFile(inFile, 'utf-8', (error, content) => {
     if (error === null) {
         let lexems = lexer(content, dictionary, preprocessor);
 
-        fs.writeFileSync("compiled.cpp", `${starting}\n${Translator.translate(lexems, {dict: dictionary, lexer}).join("\n")}\n${ending}`);
+        fs.writeFileSync("compiled.rs", `${starting}\n${Translator.translate(lexems, {dict: dictionary, lexer}).join("\n")}\n${ending}`);
         Compiler.compile(outFile, unlink)
     } else {
         console.error(error);        

@@ -13,7 +13,7 @@ class Compiler {
      */
     compile(outFile, unlink=true) {
         //compile to executable with g++
-        this.exec("g++ -x c++ compiled.cpp -o " + outFile, (error, stdout, stderr) => {
+        this.exec("rustc compiled.rs -o " + outFile, (error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
                 return;
@@ -24,7 +24,7 @@ class Compiler {
             }
             logger.success(`Compiled to ${outFile}${stdout}`);
             if (unlink) {
-                this.fs.unlink("compiled.cpp", () => {
+                this.fs.unlink("compiled.rs", () => {
                     
                 })
             }

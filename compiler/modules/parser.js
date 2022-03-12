@@ -10,22 +10,11 @@ class Parser {
     }
 
     print(lexem) {
-        this.compiled.push("\t" + `cout << ${lexem.args.join(" << ")} << endl`);
-    }
-
-    cpp(lexem) {
-        let commands = [];
-        for (let arg in lexem.args) {
-            let argument = lexem.args[arg].trim();
-            let command = argument.slice(1, -1);
-            commands.push(command);
-        };
-        //console.log(commands);
-        this.compiled.push("\t" + commands.join("\n\t"));
+        this.compiled.push("\t" + `println!(${lexem.args.join(", ")})`);
     }
 
     if(lexem) {
-        let starting = `\tif (${lexem.args[0].slice(1, -1)}) {\n`;
+        let starting = `\t#[allow(unused_parens)]\n\tif (${lexem.args[0].slice(1, -1)}) {\n`;
         let body = "\t";
         let ending = "\n\t}"
 
