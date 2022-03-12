@@ -30,7 +30,6 @@ try{
     let outFile = process.argv[2].replace(".sl", "");
 } catch (e) {
     logger.error('Please, enter the filename')
-    return;
 }
 
 let inFile = process.cwd() + "/" + process.argv[2]; //file path
